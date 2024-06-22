@@ -2,6 +2,7 @@
 
 - Dokumentacja: https://docs.keycloakify.dev/v/v10/
 - Lista dostępnych komponentów do manipulacji: https://docs.keycloakify.dev/v/v10/components
+- przydatny blog: https://willwill96.github.io/the-ui-dawg-static-site/en/keycloakify/#integrating-keycloak-and-keycloakify-jar
 - Podstawowy wymóg: zainstalowany Node.js i Maven (dla wynikowego pliku .jar, który jest importowany do Keycloaka, np do obrazu Dockera)
 - istnieją 2 modele: `login` i `account` - można je zmieniać niezależnie. `login` dotyczy co do zasady niezalogowanych użytkowników, `account` zalogowanych 
 
@@ -133,6 +134,27 @@ które znajdą się w folderze:
 
 ![img_1.png](img_1.png)
 
+## Import pliku .jar do Keycloaka
+
+Plik .jar importujemy do Keycloaka, np do obrazu Dockera
+
+Po stronie Keycloaka plik musi znależć się w folderze `/opt/keycloak/providers/`
+
+https://docs.keycloakify.dev/keycloak-configuration/importing-your-theme-in-keycloak
+
+Przykładowo, jeżeli zbudowaliśmy plik lokalnie i chcemy go skopiować do obrazu Dockera:
+
+```bash
+rsync -avz keycloak-theme-for-kc-25-and-above.jar  tomek@ip:/var/persistent/keycloakify/theme
+```
+
+,gdzie /var/persistent/keycloakify/theme jest podmontowanym katalogiem z hosta do kontenera
+
+wybierz theme z poziomu Realm lub Clienta:
+![img_4.png](img_4.png)
+
+
+
 ## base commands
 
 ```bash
@@ -159,8 +181,12 @@ npm run storybook
 
 ```bash
 npx keycloakify build-keycloak-theme
-
 ```
+
+```bash
+rsync -avz keycloak-theme-for-kc-25-and-above.jar  tomek@ip:/var/persistent/keycloakify/theme
+```
+
 
 <p align="center">
     <i>🚀 <a href="https://keycloakify.dev">Keycloakify</a> v10 starter 🚀</i>

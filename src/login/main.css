@@ -1,0 +1,5 @@
+
+body.kcBodyClass {
+    background: url('/public/background.png') no-repeat center center fixed;
+    object-fit : cover;
+}
